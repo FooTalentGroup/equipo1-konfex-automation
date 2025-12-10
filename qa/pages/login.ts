@@ -5,37 +5,45 @@ export class LoginPage {
     readonly emailInput: Locator;
     readonly passwordInput: Locator;
     readonly submitButton: Locator;
+    readonly tituloLogin: Locator;
+    readonly BuscadorChat: Locator;
+
+
 
     constructor(page: Page) {
         this.page = page;
 
-        // Ajustá estos IDs si no coinciden con el HTML real
         this.emailInput = page.locator('#usuario');
         this.passwordInput = page.locator('#contraseña');
         this.submitButton = page.getByRole('button', { name: 'Iniciar Sesión' });
+        this.tituloLogin = page.getByRole('heading', { name: 'Iniciar sesión' });
+        this.BuscadorChat = page.locator('div:has(input[placeholder="Buscar chat por nombre"])');
     }
 
-    // 👉 Navegar a la pantalla de login (NO a /calculator)
+    // Pantalla Login
     async goto() {
-        await this.page.goto('https://konfex-web-app.vercel.app/'); // o '/' si el login está en la home
+        await this.page.goto('https://konfex-web-app.vercel.app/');
     }
 
     // Flujo feliz de login
     async login(email: string, password: string) {
         await this.goto();
+
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.submitButton.click();
 
-        // Esperar a que la app redirija correctamente a /calculator
         await this.page.waitForURL('**/inbox');
-        // o más estricto:
-        // await expect(this.page).toHaveURL(/\/calculator$/);
+
     }
 
+    // Los asserts en este caso verificamos :
     async assertOnLoginPage() {
-        await expect(this.page).toHaveURL(/login/i);
-        await expect(this.emailInput).toBeVisible();
-        await expect(this.passwordInput).toBeVisible();
+        await expect(this.page).toHaveURL(/login/i);    // Que la URL sea la de '/login'
+        await expect(this.emailInput).toBeVisible();    // Que sea visible el input del email.
+        await expect(this.passwordInput).toBeVisible(); // Que sea visible el input de la password.
+        await expect(this.tituloLogin).toHaveText('Iniciar sesión'); // Que sea visible el titulo 'Iniciar sesión'.
+        await expect(this.BuscadorChat).toBeVisible();  // Que sea visible el buscador del chat.
+
     }
 }

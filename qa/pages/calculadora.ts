@@ -47,15 +47,16 @@ export class CalculadoraPage {
         this.Detalles = tabsContainer.locator('button').nth(1);   // 0 = Info, 1 = Detalle
         this.Adicional = tabsContainer.locator('button').nth(2);  // 2 = Adicional
 
+        // Rellenamos el form.
         this.NombrePrenda = page.getByPlaceholder('Ej.: Blusa manga larga - azul');
         this.addTalla = page.getByRole('button', { name: 'Agregar talla' });
         this.addPrenda = page.getByRole('button', { name: 'Agregar prenda' });
 
-        this.Tarifa = page.getByPlaceholder('000.000').first();
+        this.Tarifa = page.getByPlaceholder('Ingresa la tarifa de envío');
         this.costoAdicional = page.getByPlaceholder('Ej.: Estampado, botones adicionales');
 
 
-        this.MontoAdicional = page.getByPlaceholder('000.000').nth(1);
+        this.MontoAdicional = page.getByPlaceholder('Ingresa el monto');
         this.AgregarExtra = page.getByRole('button', { name: 'Agregar extra' });
         this.Observaciones = page.locator('textarea[name="observations"]');
         this.Revisar = page.getByRole('button', { name: 'Revisar' });
@@ -98,7 +99,7 @@ export class CalculadoraPage {
 
         await this.Titulo.fill('Camisa');
         await this.NombreCliente.fill('Nicolás');
-        await this.Email.fill('2025-12-01');
+        await this.Email.fill('nicolasminicucci@gmail.com');
         await this.Telefono.fill('11123123');
 
         await this.abrirCalendario();
@@ -128,8 +129,8 @@ export class CalculadoraPage {
     }
 
     async assertOnCalculatorPage() {
-        await expect(this.page).toHaveURL(/calculator/i);
-        await expect(this.Titulo).toBeVisible();
-        await expect(this.NombreCliente).toBeVisible();
+        await expect(this.page).toHaveURL(/calculator/i); // Que la URL sea la correcta.
+        await expect(this.Titulo).toBeVisible();          // Que el input del titulo del presupuesto. 
+        await expect(this.NombreCliente).toBeVisible();   // Que el input del nombre del cliente. 
     }
 }

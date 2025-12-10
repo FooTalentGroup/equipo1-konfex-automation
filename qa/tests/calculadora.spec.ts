@@ -3,7 +3,7 @@ import { LoginPage } from '../pages/login';
 import { MenuPage } from '../pages/menu';
 import { CalculadoraPage } from '../pages/calculadora';
 
-test.describe('Login - flujo feliz', () => {
+test.describe('Login + flujo E2E de la calculadora', () => {
     test('Login exitoso + abrir menú', async ({ page }) => {
 
         const loginPage = new LoginPage(page);
