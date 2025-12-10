@@ -17,7 +17,7 @@ export class LoginPage {
 
     // 👉 Navegar a la pantalla de login (NO a /calculator)
     async goto() {
-        await this.page.goto('/'); // o '/' si el login está en la home
+        await this.page.goto('https://konfex-web-app.vercel.app/'); // o '/' si el login está en la home
     }
 
     // Flujo feliz de login
@@ -28,7 +28,7 @@ export class LoginPage {
         await this.submitButton.click();
 
         // Esperar a que la app redirija correctamente a /calculator
-        await this.page.waitForURL('**/calculator');
+        await this.page.waitForURL('**/inbox');
         // o más estricto:
         // await expect(this.page).toHaveURL(/\/calculator$/);
     }

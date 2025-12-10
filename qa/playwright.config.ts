@@ -10,7 +10,7 @@ export default defineConfig({
   reporter: [['list'], ['html']],
   use: {
     // 👇 Ajustá esto si tu app corre en otro puerto
-    baseURL: 'https://konfex-web-app-gilt.vercel.app',
+    baseURL: 'https://konfex-web-app.vercel.app',
     trace: 'on-first-retry',
   },
   projects: [
